@@ -1,0 +1,230 @@
+<style>
+	#searchResult {
+		max-width: 250px;
+		width: 64%;
+		margin: 5px auto 0 auto;
+		position: absolute;
+		border-radius: 8px;
+
+		background-color: rgb(252, 252, 252);
+		z-index: 3;
+	}
+  .ul-1{
+    list-style-type: none;
+  }
+  .form-1{
+    border-radius: 10px;
+    padding-top: 2px;
+    padding-bottom: 2px;
+  }
+</style>
+
+<header class="header_section">
+  <div class="container-fluid">
+    <nav class="navbar navbar-expand-lg custom_nav-container">
+      <a class="navbar-brand" href="/">
+        <span style="padding-left: 30px;font-family: cursive;">
+          Book Lovers
+        </span>
+      </a>
+
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-toggle="collapse"
+        data-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class=""> </span>
+      </button>
+         {{#if search}}
+             <form action="">
+							<input class="input search-nav form-1"
+								onkeyup="sendData(this)"
+								placeholder="Search here">
+							<button onclick="click(event)"
+								class="search-btn search-btn btn btn-info btn-sm">Search</button>
+							 <ul  class="list-group list-group-flush ul-1">
+                <li id="searchResult"></li>
+                </ul>
+						</form> 
+          {{/if}}
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav">
+          <li class="nav-item active">
+            <a class="nav-link" href="/">Home
+              <span class="sr-only">(current)</span></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/user/genersplusproduct">Genres</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/user/Authorslistplus-product">Authors</a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" href="/wishList">Wishlist
+
+              {{#if wishCount}}
+                <span id="wish-count" class="badge badge-success">
+                  {{wishCount}}</span>
+              {{/if}}
+
+            </a>
+          </li>
+          {{#if user}}
+            <li class="nav-item">
+              <a class="nav-link" href="/orders">View Orders</a>
+            </li>
+          {{/if}}
+
+        
+
+        </ul>
+        <div class="user_optio_box">
+          {{#if user}}
+            {{! <a href="/logout">
+                <i class="fa fa-user" style="padding-right: 100px;" aria-hidden="true"> Logout</i>
+              </a> }}
+            <div class="dropdown show" style="margin-right: 30px;">
+              <button
+                class="btn btn-secondary dropdown-toggle"
+                role="button"
+                id="dropdownMenuLink"
+                data-toggle="dropdown"
+                aria-haspopup="true"
+                aria-expanded="false"
+              >
+                Account
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="16"
+                  height="16"
+                  fill="currentColor"
+                  class="bi bi-arrow-bar-down"
+                  viewBox="0 0 16 16"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    d="M1 3.5a.5.5 0 0 1 .5-.5h13a.5.5 0 0 1 0 1h-13a.5.5 0 0 1-.5-.5zM8 6a.5.5 0 0 1 .5.5v5.793l2.146-2.147a.5.5 0 0 1 .708.708l-3 3a.5.5 0 0 1-.708 0l-3-3a.5.5 0 0 1 .708-.708L7.5 12.293V6.5A.5.5 0 0 1 8 6z"
+                  ></path>
+                </svg>
+              </button>
+
+              <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                <a
+                  style="color: white;"
+                  class="dropdown-item"
+                  href="/user-profile"
+                ><svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="16"
+                    height="16"
+                    fill="currentColor"
+                    class="bi bi-emoji-smile"
+                    viewBox="0 0 16 16"
+                  >
+                    <path
+                      d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"
+                    ></path>
+                    <path
+                      d="M4.285 9.567a.5.5 0 0 1 .683.183A3.498 3.498 0 0 0 8 11.5a3.498 3.498 0 0 0 3.032-1.75.5.5 0 1 1 .866.5A4.498 4.498 0 0 1 8 12.5a4.498 4.498 0 0 1-3.898-2.25.5.5 0 0 1 .183-.683zM7 6.5C7 7.328 6.552 8 6 8s-1-.672-1-1.5S5.448 5 6 5s1 .672 1 1.5zm4 0c0 .828-.448 1.5-1 1.5s-1-.672-1-1.5S9.448 5 10 5s1 .672 1 1.5z"
+                    ></path>
+                  </svg>
+                  profile</a>
+                <a
+                  style="color: white;"
+                  class="dropdown-item"
+                  href="/logout"
+                ><svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="16"
+                    height="16"
+                    fill="currentColor"
+                    class="bi bi-exclamation-octagon"
+                    viewBox="0 0 16 16"
+                  >
+                    <path
+                      d="M4.54.146A.5.5 0 0 1 4.893 0h6.214a.5.5 0 0 1 .353.146l4.394 4.394a.5.5 0 0 1 .146.353v6.214a.5.5 0 0 1-.146.353l-4.394 4.394a.5.5 0 0 1-.353.146H4.893a.5.5 0 0 1-.353-.146L.146 11.46A.5.5 0 0 1 0 11.107V4.893a.5.5 0 0 1 .146-.353L4.54.146zM5.1 1 1 5.1v5.8L5.1 15h5.8l4.1-4.1V5.1L10.9 1H5.1z"
+                    ></path>
+                    <path
+                      d="M7.002 11a1 1 0 1 1 2 0 1 1 0 0 1-2 0zM7.1 4.995a.905.905 0 1 1 1.8 0l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 4.995z"
+                    ></path>
+                  </svg>
+                  Logout</a>
+              </div>
+            </div>
+          {{else}}
+            <a href="/login">
+              <i
+                class="fa fa-user"
+                style="padding-right: 150px; padding-top: 15px;"
+                aria-hidden="true"
+              > Login</i>
+            </a>
+          {{/if}}
+          {{#if cartCount}}
+            <a href="/cart" style="padding-right: 60px; padding-top: 10px;">
+              <i class="fa fa-shopping-bag"></i>
+              <span
+                class="badge badge-success"
+                id="cart-counts"
+              >{{cartCount}}</span><span>My Cart</span>
+            </a>
+          {{else}}
+            <a
+              href="/cart-is-empty"
+              style="padding-right: 60px; padding-top: 10px;"
+            >
+              <i class="fa fa-shopping-bag"></i>
+              <span
+                class="badge badge-success"
+                id="cart-counts"
+              >{{cartCount}}</span><span>My Cart</span>
+            </a>
+          {{/if}}
+        </div>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<script>
+
+	function sendData(e) {
+		const searchResult = document.getElementById('searchResult');
+		let match = e.value.match(/^[a-zA-Z ]*/)
+		let match2 = e.value.match(/\s*/);
+		if (match2[0] == e.value) {
+			searchResult.innerHTML = "";
+			return;
+		}
+		if (match[0] == e.value) {
+			fetch('search', {
+				method: 'POST',
+				headers: { 'Content-Type': 'application/json' },
+				body: JSON.stringify({ payload: e.value })
+
+			}).then(res => res.json()).then(data => {
+				let payload = data.payload;
+				searchResult.innerHTML = ''
+				if (payload.length < 1) {
+					searchResult.innerHTML = '<p style="padding-left: 20px; color: red; ">sorry nothing found.</p>'
+					return;
+				}
+				payload.forEach((item, index) => {
+					if (index > 0) searchResult.innerHTML += '<hr>';
+					searchResult.innerHTML += `<a style="padding-left: 20px" href="/image-view?id=${item._id}">${item.Name}</a>`
+				});
+			});
+			return;
+		}
+		searchResult.innerHTML = '';
+
+	}
+
+</script>
+
+<!--Main Navigation-->

@@ -1,0 +1,62 @@
+<section style="margin-left:300px ;">
+    <div class="container">
+         <div class="row mt-4">
+            <a href="/admin/Add-coupon" class=" btn btn-success ml-auto">Add-coupon <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right-square-fill" viewBox="0 0 16 16">
+  <path d="M0 14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2a2 2 0 0 0-2 2v12zm4.5-6.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5a.5.5 0 0 1 0-1z"/>
+</svg></a>
+        </div>
+     <table class="table mt-5" id="table_id">
+  <thead >
+    <tr>
+      <th scope="col">No</th>
+      <th scope="col">Coupon Code</th>
+      <th scope="col">Offer percentage</th>
+      <th scope="col">Starting Date</th>
+      <th scope="col">Expiry Date</th>
+      <th scope="col">Delete</th>
+
+
+    </tr>
+  </thead>
+  <tbody>
+      {{#each coupons}}
+     <tr>
+       <td>{{counter @index}}</td>
+      <td><h5>{{this.Coupon}}</td></h5>
+      <td><h6>{{this.Offer}} %</td></h6>
+      <td><h6>{{this.Starting}}</h6></td>
+       <td><h6>{{this.Expiry}}</h6></td>
+        <td>
+          {{!-- <a href="/admin/delete-user/{{this._id}}" class="btn btn-danger" onclick="return confirm('Are you want to unblock {{this.Name}}?')">Delete User</a> --}}
+          <button class="btn btn-danger" onclick="sweetalertclick('/admin/delete-coupon/{{this._id}}')">Delete <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-basket" viewBox="0 0 16 16">
+  <path d="M5.757 1.071a.5.5 0 0 1 .172.686L3.383 6h9.234L10.07 1.757a.5.5 0 1 1 .858-.514L13.783 6H15a1 1 0 0 1 1 1v1a1 1 0 0 1-1 1v4.5a2.5 2.5 0 0 1-2.5 2.5h-9A2.5 2.5 0 0 1 1 13.5V9a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h1.217L5.07 1.243a.5.5 0 0 1 .686-.172zM2 9v4.5A1.5 1.5 0 0 0 3.5 15h9a1.5 1.5 0 0 0 1.5-1.5V9H2zM1 7v1h14V7H1zm3 3a.5.5 0 0 1 .5.5v3a.5.5 0 0 1-1 0v-3A.5.5 0 0 1 4 10zm2 0a.5.5 0 0 1 .5.5v3a.5.5 0 0 1-1 0v-3A.5.5 0 0 1 6 10zm2 0a.5.5 0 0 1 .5.5v3a.5.5 0 0 1-1 0v-3A.5.5 0 0 1 8 10zm2 0a.5.5 0 0 1 .5.5v3a.5.5 0 0 1-1 0v-3a.5.5 0 0 1 .5-.5zm2 0a.5.5 0 0 1 .5.5v3a.5.5 0 0 1-1 0v-3a.5.5 0 0 1 .5-.5z"/>
+</svg></button>
+        </td>
+    </tr>
+      {{/each}}
+  </tbody> 
+</table>
+    </div>
+</section>
+
+<script>
+  function sweetalertclick(value){
+  Swal.fire({
+  title: 'Are you sure?',
+  text: "You won't be delete this coupon!",
+  icon: 'warning',
+  showCancelButton: true,
+  confirmButtonColor: '#3085d6',
+  cancelButtonColor: '#d33',
+  confirmButtonText: 'Yes, delete it!'
+}).then((result) => {
+  if (result.isConfirmed) {
+   // Swal.fire(
+      //'Deleted!',
+      //'Your file has been deleted.',
+      //'success'
+    window.location = value
+  }
+})
+}
+</script>

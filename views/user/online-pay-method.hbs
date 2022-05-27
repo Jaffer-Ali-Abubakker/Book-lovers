@@ -1,0 +1,79 @@
+{{>user-header}}
+
+<div class="container-fluid">
+    <div class="row justify-content-center">
+        <div class="col-12 col-lg-11">
+            <div class="card card0 rounded-0">
+                <div class="row">
+                    <div class="col-md-5 d-md-block d-none p-0 box">
+                        <div class="card rounded-0 border-0 card1" id="bill">
+                            <h3 id="heading1">Payment Summary</h3>
+                            <div class="row">
+                                <div class="col-lg-7 col-8 mt-4 line pl-4">
+                                    <h2 class="bill-head">Electronics</h2> <small class="bill-date">2017 Feb 10 at 10:30 PM</small>
+                                </div>
+                                <div class="col-lg-5 col-4 mt-4">
+                                    <h2 class="bill-head px-xl-5 px-lg-4">CAF</h2>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-7 col-8 mt-4 line pl-4">
+                                    <h2 class="bill-head">Food</h2> <small class="bill-date">2017 Feb 25 at 11:30 PM</small>
+                                </div>
+                                <div class="col-lg-5 col-4 mt-4">
+                                    <h2 class="bill-head px-xl-5 px-lg-4">JFK</h2>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-7 col-8 mt-4 line pl-4">
+                                    <h2 class="bill-head">Grocery</h2> <small class="bill-date">2017 Mar 17 at 10:45 PM</small><br> <small class="bill-date">2017 Mar 18 at 11:45 PM</small>
+                                </div>
+                                <div class="col-lg-5 col-4 mt-4">
+                                    <h2 class="bill-head px-xl-5 px-lg-4">LHR</h2>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-7 col-8 mt-4 line pl-4">
+                                    <h2 class="bill-head">Accessories</h2> <small class="bill-date">2017 Apr 13 at 05:30 PM</small>
+                                </div>
+                                <div class="col-lg-5 col-4 mt-4">
+                                    <h2 class="bill-head px-xl-5 px-lg-4">JFK</h2>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12 red-bg">
+                                    <p class="bill-date" id="total-label">Total Price</p>
+                                    <h2 class="bill-head" id="total">$ /h2> <small class="bill-date" id="total-label">Price includes all taxes</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-7 col-sm-12 p-0 box">
+                        <div class="card rounded-0 border-0 card2" id="paypage">
+                            <div class="form-card">
+                                <h2 id="heading2" class="text-danger">Payment Method</h2>
+                                <div class="radio-group">
+                                    <div class='radio' data-value="credit"><img src="https://i.imgur.com/28akQFX.jpg" width="200px" height="60px"></div>
+                                    <div class='radio' data-value="paypal"><img src="https://i.imgur.com/5QFsx7K.jpg" width="200px" height="60px"></div> 
+                                  <a href="/Razor-pay" onclick="return onclickFunction('id')"><div class='radio' id="payment-form"  data-value="RazorPay"><img src="data:image/jpeg;base64,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ulfe32iobCi2aFJv2pHx1FPu+aqfq32RMscXKSoqTSRHBMnjow3S9ioe0VVxdVwMg86ac1TyJ4FvPA+GaT0U7p+01Re1V/3ei3YBHCpUHfx5qnA+bYHcRJym2oy/1RGOHtnMRE8xsIiIAiIgCIiAIiIAiIgCIiAIiIAiIgCIiAIiIAiIgCIiAIiIAiIgCIiARn0q7Bv72pbrbUDUpUlZmbrKSjW5Axh2B4BfDHa9Z4ejLcu8tbxrm6pdUqIyp2qblncqM9hjjChuf70lmJosslHaRtV2cxETMsREQBERAEREA1zfOpe+ysljSNSvU7GoPTTq1I4uNbrk9wxnB493GINm9Gm0Xq00rUOopMwDv1lFtKfEQqsSTjgOHMjMsDE0jlcVSJlFPs8mzbFKFJKFNQtOmAqgeA/uTzJ7yTPZETMoREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREA/9k=" width="200px" height="60px"></div></a> <br>
+                                </div> <label class="pay">Name on Card</label> <input type="text" name="holdername" placeholder="John Smith">
+                                <div class="row">
+                                    <div class="col-8 col-md-6"> <label class="pay">Card Number</label> <input type="text" name="cardno" id="cr_no" placeholder="0000-0000-0000-0000" minlength="19" maxlength="19"> </div>
+                                    <div class="col-4 col-md-6"> <label class="pay">CVV</label> <input type="password" name="cvcpwd" placeholder="&#9679;&#9679;&#9679;" class="placeicon" minlength="3" maxlength="3"> </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12"> <label class="pay">Expiration Date</label> </div>
+                                    <div class="col-md-12"> <input type="text" name="exp" id="exp" placeholder="MM/YY" minlength="5" maxlength="5"> </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6"> <input type="submit" value="MAKE A PAYMENT " class="btn btn-info placeicon"> </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

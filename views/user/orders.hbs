@@ -1,0 +1,59 @@
+{{>user-header}}
+<section>
+    <div class="container">
+        <div class="row mt-4">
+        </div>
+        <table class="table mt-5">
+  <thead class="thead-dark">
+    <tr>
+       <th scope="col">No</th>
+      <th scope="col">Date</th>
+      <th>Address</th>
+      <th>Pin Code</th>
+      <th>Mobile</th>
+      <th scope="col">Amount</th>
+      <th scope="col">payment</th>
+      <th>Status</th>
+      <th>View products</th>
+      <th>Cancel-Order</th>
+      
+    </tr>
+  </thead>
+  <tbody>
+      {{#each orders}}
+    <tr>
+      <td>{{counter @index}}</td>
+      <td>{{date this.Date}}</td>
+      <td>{{this.deliveryDetails.address}}</td>
+      <td>{{this.deliveryDetails.pincode}}</td>
+      <td>{{this.deliveryDetails.phone}}</td>
+      <td>{{this.totalAmount}}</td>
+      <td>{{this.paymentMethod}}</td>
+      <td>{{this.status}}</td>
+        
+        <td>
+         <a href="/view-order-products/{{this._id}}" class="btn btn-primary">View Products</a>
+       </td>
+        <td>
+         <form action="/cancel-order" method="post">
+         <input type="text" name="status" value="cancelled" hidden>
+         <input type="text" name="orderId" value="{{this._id}}" hidden>
+         
+         {{#if Delivered}}
+
+         {{else}}
+         {{#if cancelled}}
+         <p style="color: white;"></p>
+         {{else}}
+          <button type="submit" class="btn btn-danger">Cancel</button>
+         {{/if}}
+         {{/if}}
+         </form>
+       </td>
+    </tr>
+    {{/each}}
+  </tbody>
+</table>
+
+    </div>
+</section>

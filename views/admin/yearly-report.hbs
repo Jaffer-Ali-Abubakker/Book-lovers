@@ -1,0 +1,50 @@
+<section>
+    <div class="container"style="margin-right:130px ;">
+        <div class="row mt-4">
+        </div>
+        <table id="example" class="table mt-5">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">No</th>
+      <th scope="col">Date</th>
+      <th>UserId</th>
+      <th>Address</th>
+      <th>Pin Code</th>
+      <th>Mobile</th>
+      <th scope="col">Amount</th>
+      <th scope="col">payment</th>
+      <th>Status</th>
+      {{!-- <th>View products</th> --}}
+      
+    </tr>
+  </thead>
+  <tbody>
+      {{#each report}}
+    <tr>
+       <td style="color: black;">{{counter @index}}</td>
+      <td style="color: black;">{{date this.Date}}</td>
+      <td style="color: black;">{{this.UserId}}</td>
+      <td style="color: black;">{{this.deliveryDetails.address}}</td>
+      <td style="color: black;">{{this.deliveryDetails.pincode}}</td>
+      <td style="color: black;">{{this.deliveryDetails.phone}}</td>
+      <td style="color: black;">{{this.totalAmount}}</td>
+      <td style="color: black;">{{this.paymentMethod}}</td>
+      <td style="color: black;">{{this.status}}</td>
+        
+    </tr>
+    {{/each}}
+  </tbody>
+</table>
+
+    </div>
+</section>
+<script type="text/javascript" charset="utf-8">
+    $(document).ready(function () {
+        $('#example').DataTable({
+            dom: 'Bfrtip',
+            buttons: [
+                'copy', 'csv', 'excel', 'pdf', 'print'
+            ]
+        });
+    });
+</script>

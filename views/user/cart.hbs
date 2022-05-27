@@ -1,0 +1,245 @@
+{{>user-header}}
+
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>    
+
+<style>
+  .discount {
+    padding-left: 25px;
+    margin-top: -30px;
+    padding-bottom: 10px;
+    font-weight: bold;
+  }
+
+  .dis1 {
+    font-size: larger;
+    color: greenyellow;
+    font-weight: bolder;
+  }
+  
+</style>
+
+    <div class="col-lg-12 cartc">
+      <section>
+  <div class="container cart-items">
+
+    <table class="table mt-5">
+      <thead>
+        <tr>
+
+          <th scope="col">Item</th>
+          <th scope="col">Title</th>
+          <th scope="col">Quantity</th>
+          <th scope="col">Price</th>
+          <th scope="col">Discount</th>
+          <th scope="col">Remove Item</th>
+
+        </tr>
+
+      </thead>
+      <tbody>
+        {{#each products}}
+        <tr>
+          <td><img style="width: 70px; height: 70px;" src="/product-images/{{this.product._id}}.jpg" alt=""></td>
+          <td> <span style="font-weight:bolder; font-size: larger;">{{this.product.Name}}</span></td>
+
+          <td>
+            <p>{{user._id}}</p>
+            <button class="cart-item-count mr-3 btn btn-info btn-xs"
+              onclick="changeQuantity('{{this._id}}','{{this.product._id}}','{{../user}}',-1)">-</button>
+            <span style="font-size: larger;" id="{{this.product._id}}">{{this.quantity}}</span>
+            <button class="cart-item-count ml-3 btn btn-info btn-xs"
+              onclick="changeQuantity('{{this._id}}','{{this.product._id}}','{{../user}}',1)">+</button>
+          </td>
+          <td>{{this.product.price}} ₹</td>
+          <td class="dis1">-{{this.product.discount}}%</td>
+
+          <td>
+            <button type="button" class="btn btn-primary btn-sm me-1 mb-2" data-mdb-toggle="tooltip" title="Remove item"
+              onclick="deleteCartItem('{{this._id}}','{{this.product._id}}')">
+              <i class="fas fa-trash"></i>
+
+            </button>
+          </td>
+        </tr>
+        {{/each}}
+
+      </tbody>
+    </table>
+
+      <div class="card bg-dark text-white rounded-3">
+        <div class="card-body">
+          <div class="container">
+            <h4>Add coupon for Extra discount</h4>
+            <p>Use Promo Code:
+            <div class="col-sm-6 my-1">
+              <label class="sr-only" for="inlineFormInputGroupUsername">Username</label>
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <div class="input-group-text">@</div>
+                </div>
+                <input type="text" class="form-control" id="couponInput" name="Coupon">
+                <input type="text" id="couponTotal" name="Total" value="{{discountVal}}" hidden>
+                <span style="padding-left: 20px;"><button type="submit" id="couponBtn" onclick="couponApply()"
+                    class="btn btn-primary">apply</button></span>
+              </div>
+            </div>
+            <div class="col-auto my-1" style="padding-left: 270px">
+              <div class="mt-2">
+                    <div class="alert alert-danger" style="display: none;" id="couponUsed" role="alert">
+                      This Coupon was redeemed
+                    </div>
+                    <div class="alert alert-danger" style="display: none;" id="couponInvalid" role="alert">
+                      This Coupon is invalid
+                    </div>
+                    <div class="alert alert-success" style="display: none;" id="couponSuccess" role="alert">
+                      Coupon Applied Successfully
+                    </div>
+                    <div class="alert alert-warning" style="display: none;" id="couponExpired" role="alert">
+                      Sorry!!! Your Coupon has been Expired
+                    </div>
+                  </div>
+            </div>
+            <p class="expire">Expires: Jan 03, 2021</p>
+          </div>
+          <hr class="my-4">
+
+          <div class="d-flex justify-content-between">
+            <p class="mb-2">Subtotal</p>
+            <p class="mb-2" id="subtotal">₹ {{totalValue}}</p>
+          </div>
+
+          <div class="d-flex justify-content-between">
+            <p class="mb-2">Discount</p>
+            <p class="mb-2" id="discount1">₹ {{discountVal}}</p>
+          </div>
+          <div class="d-flex justify-content-between">
+            <p class="mb-2" id="DTotal" style="display: none;">Coupon Discount</p>
+            <p class="mb-2" id="Tdiscount" style="display: none;">₹ <span id="discount"
+            style="display: none;"></span></p>
+          </div>
+           <div class="d-flex justify-content-between">
+            <p class="value" id="newTotal" style="display: none;">Total Discount</p>
+             <p class="price" id="tdTotal" style="display: none;">₹ <span id="totalOriginal"
+            style="display: none;">{{discountVal}}</span> </p>
+          </div>
+
+          <div class="d-flex justify-content-between mb-4">
+            <p style="display: none;" class="mb-2">Total</p>
+            <p style="display: none;" class="mb-2"  id="newtotalll">₹ {{finalorder}}</p>
+          </div>
+
+          <button type="button" class="btn btn-info btn-block btn-lg">
+            <div class="d-flex justify-content-between" id="total">
+              <span style="font-style: italic; font-size: large;">Total :-</span>
+              <span class="pl-3" style="font-weight: bolder;"> ₹ {{finalorder}} </span>
+              <a href="/place-order" style="color: white;"><span class="float-left">Checkout <i
+                    class="fas fa-long-arrow-alt-right ms-2 "></i></span></a>
+            </div>
+          </button>
+
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+<script>
+  function changeQuantity(cartId, proId, UserId, count) {
+    let quantity = parseInt(document.getElementById(proId).innerHTML)
+    count = parseInt(count)
+    console.log(UserId)
+
+    $.ajax({
+      url: '/change-product-quantity',
+      data: {
+        //user:UserId,
+        cart: cartId,
+        product: proId,
+        count: count,
+        quantity: quantity,
+      },
+      method: 'post',
+      success: (response) => {
+        if (response.deleteProduct) {
+          alert("product removed from cart")
+          location.reload()
+        } else {
+          document.getElementById(proId).innerHTML = quantity + count
+          location.reload()
+          document.getElementById('subtotal').innerHTML = response.total
+         let discount1 =  parseInt(document.getElementById('discount1').innerHTML)
+
+        }
+      }
+    })
+  }
+
+</script>
+  <script>
+
+  function couponApply() {
+    console.log("coupon callllllllllll....")
+    let couponCode = document.getElementById('couponInput').value
+    let couponTotal = document.getElementById('couponTotal').value
+    $.ajax({
+      url: '/couponApply',
+      data: {
+        Coupon: couponCode,
+        Total: couponTotal
+      },
+      method: 'post',
+      success: (response) => {
+        if (response.couponSuccess) {
+          let oldTotal = parseInt(document.getElementById('totalOriginal').innerHTML)
+          document.getElementById('couponInput').readOnly = true
+          let discount = oldTotal - parseInt(response.total)
+          document.getElementById('discount').innerHTML = discount
+          let NewCount = parseInt(document.getElementById('subtotal').innerHTML)
+          let newtotalll = NewCount - oldTotal
+          document.getElementById('newtotalll').innerHTML = newtotalll
+          
+          $('#discount').show()
+          $('#newTotal').show()
+          $('#tdTotal').show()
+          $('#totalOriginal').show()
+          $('#DTotal').show()
+          $('#Tdiscount').show()
+
+
+
+          document.getElementById('totalOriginal').innerHTML = response.total
+          $('#couponSuccess').show()
+          $('#couponUsed').hide()
+          $('#couponInvalid').hide()
+          $('#couponExpired').hide()
+
+         }
+        if (response.couponUsed) {
+          $('#couponUsed').show()
+          $('#couponSuccess').hide()
+          $('#couponInvalid').hide()
+          $('#couponExpired').show()
+          $('#discount').hide()
+
+        }
+        if (response.invalidCoupon) {
+          $('#couponInvalid').show()
+          $('#couponSuccess').hide()
+          $('#couponUsed').hide()
+          $('#couponExpired').hide()
+          $('#discount').show()
+        }
+        if (response.couponExpired) {
+          $('#couponExpired').show()
+          $('#couponSuccess').hide()
+          $('#couponInvalid').hide()
+          $('#couponUsed').hide()
+          $('#discount').hide()
+        }
+      }
+    })
+  }
+
+</script>

@@ -1,0 +1,305 @@
+{{>user-header}}
+
+
+<style>
+  .checkout{
+    padding-top: -100px;
+  }
+</style>
+<div class="row mt-3 mx-3" style="margin-top:25px ;">
+   <div class="col-md-3">
+   
+     <div style="margin-top: 50px; margin-left: 10px;" class="text-center">
+      <i id="animationDemo" data-mdb-animation="slide-right" data-mdb-toggle="animation"
+        data-mdb-animation-reset="true" data-mdb-animation-start="onScroll"
+        data-mdb-animation-on-scroll="repeat" class="fas fa-3x fa-shipping-fast text-white"></i>
+      <h3 class="mt-3 text-white">Welcome</h3>
+      <p class="white-text">You are 30 seconds away from compleating your order!</p>
+    </div>
+    <div class="text-center">
+      <button type="submit" class="btn btn-white btn-rounded back-button">Go back</button>
+    </div>
+    <br>
+    <br>
+ <section>
+   <div class="container" style="border: em;">
+<div class="row">
+  <div class="col-md-12">
+     
+    <tr>
+     <form action=""></form>
+    
+  <strong> choose Delivery Address</strong>
+  <br>
+  <span id="name">{{userdetails.Name}}</span><br>
+  <span id="email">{{userdetails.Email}},</span>
+  <span id="city">{{userdetails.city}},</span>
+  <span id="pin">{{userdetails.pincode}},</span>
+  <span id="address">{{userdetails.address}},</span>
+  <span id="phoneNumber">{{userdetails.phoneNumber}}</span>
+  <button class="btn btn-primary btn-sm" type="submit" onclick="chooseAddress('{{userdetails.Name}}','{{userdetails.Email}}',
+  '{{userdetails.city}}','{{userdetails.pincode}}','{{userdetails.address}}','{{userdetails.phoneNumber}}')">Add Now</button><br>
+  
+   </form>
+  
+  </div>
+</div>
+</div>
+ </section>
+  </div> 
+  <div class="col-md-9 justify-content-center">
+    <div class="card card-custom pb-4">
+      <div class="card-body mt-0 mx-5">
+        <div class="text-center mb-3 pb-2 mt-3">
+          <h4 style="color: #495057 ;">Add New Delivery Details</h4>
+        </div>
+
+        <form action="/place-order" method="post" class="mb-0" name="myForm" id="checkout-form" onsubmit="return(validate());">
+
+          <div class="row mb-4">
+            <div class="col">
+              <div class="form-outline">
+                <input type="text" id="Name" class="form-control input-custom" name="Name" style="background-color: gray;" />
+                <label class="form-label" for="form9Example1">Full Name</label>
+              </div>
+               <span style="color:crimson ;"id="nameErr"></span>
+            </div>
+            <div class="col">
+              <div class="form-outline">
+                <input type="text" id="Email" class="form-control input-custom" name="Email" style="background-color: gray;"/>
+                <label class="form-label" for="form9Example2">Email</label>
+              </div>
+              <span style="color:crimson ; "id="EmailErr"></span>
+            </div>
+          </div>
+          <div class="row mb-4">
+            <div class="col">
+              <div class="form-outline">
+                <input type="text" id="City" class="form-control input-custom" name="City" style="background-color: gray;"/>
+                <label class="form-label" for="form9Example3">City</label>
+              </div>
+              <span style="color:crimson ; "id="cityErr"></span>
+            </div>
+            <div class="col">
+              <div class="form-outline">
+                <input type="text" id="pincode" class="form-control input-custom" name="pincode" style="background-color: gray;"/>
+                <label>pincode</label>
+              </div>
+              <span style="color:crimson ; "id="pinCodeErr"></span>
+            </div>
+          </div>
+          <div class="row mb-4">
+            <div class="col">
+              <div class="form-outline">
+                <input type="text" id="DAddress" class="form-control input-custom" name="DAddress" style="background-color: gray;" />
+                <label class="form-label" for="form9Example6">Delivery Address</label>
+              </div>
+              <span style="color:crimson ; "id="houseNameErr"></span>
+            </div>
+            <div class="col">
+              <div class="form-outline">
+                <input type="text" id="phone" name="phone" class="form-control input-custom" style="background-color: gray;"/>
+                <label>Phone Number</label>
+              </div>
+              <span style="color:crimson ; "id="phoneNumberErr"></span>
+            </div>
+            <input type="text" name="UserId" id="" value="{{user._id}}" hidden>
+            </div>
+            <div class="col">
+              <div class="form-outline">
+                <h5>Total Amount: Rs.{{finalorder}}</h5>
+                <p style="font-size: large; color: red;">Payment Method</p>
+                <label class="radio-inline">
+                  <input type="radio" name="payment-method" value="COD" checked> Cash on Delivery
+                </label>
+                <br>
+                 <label class="radio-inline">
+                  <input type="radio" name="payment-method" value="Razorpay" checked> Razor pay
+                </label>
+                 <br>
+                 <label class="radio-inline">
+                  <input type="radio" name="payment-method" value="paypal" checked> paypal
+                </label>
+              </div>
+            </div>
+          
+
+          <div class="float-end ">
+            <!-- Submit button -->
+          
+          <button class="btn btn-primary float-right checkout" type="submit" onclick="validation(event)">Checkout</button>
+        </form>
+      </div>
+    </div>
+   
+
+  </div>
+</div>
+<script>
+
+	let name = document.getElementById('Name')
+  let email = document.getElementById('Email')
+	let houseName = document.getElementById('DAddress')
+	let city = document.getElementById('City')
+	let pinCode = document.getElementById('pincode')
+	let phoneNumber = document.getElementById('phone')
+
+	let nameErr = document.getElementById('nameErr')
+  let emailErr = document.getElementById('EmailErr')
+	let houseNameErr = document.getElementById('houseNameErr')
+	let cityErr = document.getElementById('cityErr')
+	let pinCodeErr = document.getElementById('pinCodeErr')
+	let phoneNumberErr = document.getElementById('phoneNumberErr')
+  
+
+	let nameMsg = []
+	let houseMsg = []
+	let cityMsg = []
+	let pinMsg = []
+	let phoneMsg = []
+  let emailMsg = []
+
+
+	function validation(e) {
+
+
+		if (name.value == null || name.value == "") {
+			nameMsg.push('please enter Name')
+		}
+		if (houseName.value == null || houseName.value == "") {
+			houseMsg.push('please enter HouseName')
+		}
+		if (city.value == null || city.value == "") {
+			cityMsg.push("Please enter city Name")
+		}
+		if (pinCode.value == null || pinCode.value == "") {
+			pinMsg.push('Please enter PinCode')
+		} else if (isNaN(pinCode.value) == true) {
+
+			pinMsg.push('Incorrect Format')
+		}
+     if(email.value.indexOf('@')<=0){
+      emailMsg.push('Invaild Email')
+    }else if(email.value.charAt(email.value.length-4)!='.'){
+       emailMsg.push('Email format Incorrect') 
+    }
+		if (phoneNumber.value == null || phoneNumber.value == "") {
+			phoneMsg.push('please enter PhoneNumber')
+		} else if (phoneNumber.value.length < 10 || phoneNumber.value.length > 10) {
+			phoneMsg.push('Incorrect phoneNumber')
+		} else if (isNaN(phoneNumber.value) == true) {
+			phoneMsg.push('Please enter in Number Format')
+		}
+
+
+
+		if (nameMsg.length > 0) {
+			e.preventDefault()
+			nameErr.innerHTML = "";
+			nameErr.innerHTML = nameMsg.join('')
+		}
+
+		if (houseMsg.length > 0) {
+			e.preventDefault()
+			houseNameErr.innerHTML = houseMsg.join('')
+		}
+		if (cityMsg.length > 0) {
+			e.preventDefault()
+			cityErr.innerHTML = cityMsg.join('')
+		}
+		if (pinMsg.length > 0) {
+			e.preventDefault()
+			pinCodeErr.innerHTML = pinMsg.join('')
+		}
+		if (phoneMsg.length > 0) {
+			e.preventDefault()
+			phoneNumberErr.innerHTML = phoneMsg.join('')
+		}
+    	if (emailMsg.length > 0) {
+			e.preventDefault()
+			emailErr.innerHTML = emailMsg.join('')
+		}
+	}
+
+
+</script>
+ 
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+<script>
+  $("#checkout-form").submit((e)=>{
+    e.preventDefault()
+    $.ajax({
+      url:'/place-order',
+      method:'post',
+      data:$('#checkout-form').serialize(),
+      success:(response)=>{
+        if(response.codSuccess){
+          location.href='/order-success'
+        }else if(response.razorpay){
+          razorpayPayment(response)
+        }else if(response){
+           location.href=response.url
+        }
+      }
+    })
+  })
+  function razorpayPayment(order){
+    var options = {
+    "key": "rzp_test_SMNGOVhaUg4YY1", // Enter the Key ID generated from the Dashboard
+    "amount": order.amount, // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
+    "currency": "INR",
+    "name": "Book-Lovers",
+    "description": "Test Transaction",
+    "image": "https://example.com/your_logo",
+    "order_id": order.id, //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
+    "handler": function (response){
+      
+
+        verifyPayment(response,order)
+    },
+    "prefill": {
+        "name": "Gaurav Kumar",
+        "email": "gaurav.kumar@example.com",
+        "contact": "9999999999"
+    },
+    "notes": {
+        "address": "Razorpay Corporate Office"
+    },
+    "theme": {
+        "color": "#3399cc"
+    }
+};
+
+var rzp1 = new Razorpay(options);
+rzp1.open();
+  }
+  function verifyPayment(payment,order){
+    $.ajax({
+      url:'/verify-payment',
+      data:{
+        payment,
+        order
+      },
+      method:'post',
+      success:(response)=>{
+        if(response.status){
+           location.href='/order-success'
+        }else{
+          location.href='/payment-failed'
+        }
+      }
+    })
+  }
+  function chooseAddress(name,email,city,pin,address,phone){
+
+    document.getElementById('Name').value=name;
+    document.getElementById('Email').value=email;
+    document.getElementById('City').value=city;
+    document.getElementById('pincode').value=pin;
+    document.getElementById('DAddress').value=address;
+    document.getElementById('phone').value=phone;
+    
+  }
+</script>
+
+

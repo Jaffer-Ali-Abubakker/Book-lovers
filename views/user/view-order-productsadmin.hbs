@@ -1,0 +1,55 @@
+<section class="product_section ">
+    <div class="container">
+      
+      <div class="product_heading">
+        <h2> 
+            {{!-- {{#each products}} --}}
+          {{this.category}} Books
+             {{!-- {{/each}} --}}
+        </h2>
+      </div>
+
+
+
+
+      <div class="product_container">
+         {{#each products}}
+        <div class="box">
+          <div class="box-content">
+            <span class="badge badge-success">-{{this.discount}}%</span>
+            <div class="img-box">
+             <a  class="image"><img src="/product-images/{{this.product._id}}.jpg" class="image" alt=""></a>
+            </div>
+            <div class="detail-box">
+              <div class="text">
+                <h5>
+                  {{this.product.Name}}
+                </h5>
+                <p>{{this.product.category}}</p>
+               
+                <h5>
+                  <span>₹</span> {{this.product.price}}
+                </h5>
+              </div>
+              <div class="like">
+                <h6>
+                  Like
+                </h6>
+                <div class="star_container">
+                  <i class="fa fa-star" aria-hidden="true"></i>
+                  <i class="fa fa-star" aria-hidden="true"></i>
+                  <i class="fa fa-star" aria-hidden="true"></i>
+                  <i class="fa fa-star" aria-hidden="true"></i>
+                  <i class="fa fa-star" aria-hidden="true"></i>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="btn-box">
+          </div>
+        </div>
+         {{/each}}
+          
+      </div>
+    </div>
+  </section>

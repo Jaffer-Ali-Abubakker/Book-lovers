@@ -1,0 +1,122 @@
+<head>
+  <script
+    src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"
+  ></script>
+</head>
+
+<section>
+  <div class="container" style="margin-left: 300px;">
+    <div class="row mt-4">
+      <a href="/admin/add-product" class="btn btn-success" style="margin-left: 400px;">Add Product
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="16"
+          height="16"
+          fill="currentColor"
+          class="bi bi-box2-fill"
+          viewBox="0 0 16 16"
+        >
+          <path
+            d="M3.75 0a1 1 0 0 0-.8.4L.1 4.2a.5.5 0 0 0-.1.3V15a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1V4.5a.5.5 0 0 0-.1-.3L13.05.4a1 1 0 0 0-.8-.4h-8.5ZM15 4.667V5H1v-.333L1.5 4h6V1h1v3h6l.5.667Z"
+          ></path>
+        </svg></a>
+    </div>
+    <table id="example" class="table mt-5">
+      <thead class="thead-dark">
+        <tr>
+          <th scope="col">No</th>
+          <th scope="col">Book name</th>
+          <th scope="col">Author</th>
+          <th scope="col">Genre</th>
+          <th scope="col">rating</th>
+          <th scope="col">price</th>
+          <th scope="col">Discount</th>
+          <th>image</th>
+          <th scope="col">Edit</th>
+          <th scope="col">Delete</th>
+
+        </tr>
+      </thead>
+      <tbody>
+        {{#each products}}
+          <tr>
+            <td style="color: black;">{{counter @index}}</td>
+            <td style="color: black;"><h6>{{this.Name}}</h6></td>
+            <td style="color: black;">{{this.Author}}</td>
+            <td style="color: black;">{{this.category}}</td>
+            <td style="color: black;">{{this.rating}}</td>
+            <td style="color: black;">{{this.price}}</td>
+            <td style="color: black;" class="product-discount-label">-{{this.discount}}%</td>
+            <td><img
+                style="width: 50px;height: 50px"
+                src="/product-images/{{this._id}}.jpg"
+                alt=""
+              /></td>
+            <td>
+            <a href="/admin/edit-product/{{this._id}}" class="btn btn-primary">Edit</a>
+            </td>
+
+            <td>
+              {{!-- <button
+                class="btn btn-danger"
+                onclick="sweetalertclick('/admin/delete-product/{{this._id}}')"
+              >Delete
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="16"
+                  height="16"
+                  fill="currentColor"
+                  class="bi bi-basket2"
+                  viewBox="0 0 16 16"
+                >
+                  <path
+                    d="M4 10a1 1 0 0 1 2 0v2a1 1 0 0 1-2 0v-2zm3 0a1 1 0 0 1 2 0v2a1 1 0 0 1-2 0v-2zm3 0a1 1 0 1 1 2 0v2a1 1 0 0 1-2 0v-2z"
+                  ></path>
+                  <path
+                    d="M5.757 1.071a.5.5 0 0 1 .172.686L3.383 6h9.234L10.07 1.757a.5.5 0 1 1 .858-.514L13.783 6H15.5a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-.623l-1.844 6.456a.75.75 0 0 1-.722.544H3.69a.75.75 0 0 1-.722-.544L1.123 8H.5a.5.5 0 0 1-.5-.5v-1A.5.5 0 0 1 .5 6h1.717L5.07 1.243a.5.5 0 0 1 .686-.172zM2.163 8l1.714 6h8.246l1.714-6H2.163z"
+                  ></path>
+                </svg></button> --}}
+                 <a class="btn btn-danger" onclick="deleteProduct(event)" name="{{this.Description}}" brand="{{this.Title}}" href="/admin/delete-product?id={{this._id}}">Delete</a>
+            </td>
+          </tr>
+        {{/each}}
+      </tbody>
+    </table>
+
+  </div>
+</section>
+
+<script>
+
+function sweetalertclick(value){
+  Swal.fire({
+  title: 'Are you sure?',
+  text: "You won't be delete this product!",
+  icon: 'warning',
+  showCancelButton: true,
+  confirmButtonColor: '#3085d6',
+  cancelButtonColor: '#d33',
+  confirmButtonText: 'Yes, delete it!'
+}).then((result) => {
+  if (result.isConfirmed) {
+   // Swal.fire(
+      //'Deleted!',
+      //'Your file has been deleted.',
+      //'success'
+    window.location = value
+  }
+})
+}
+
+</script>
+
+<script type="text/javascript" charset="utf-8">
+    $(document).ready(function () {
+        $('#example').DataTable({
+            dom: 'Bfrtip',
+            buttons: [
+                'copy', 'csv', 'excel', 'pdf', 'print'
+            ]
+        });
+    });
+</script>

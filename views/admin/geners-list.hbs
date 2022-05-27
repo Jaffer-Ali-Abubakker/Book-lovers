@@ -1,0 +1,58 @@
+  
+
+
+<section>
+    <div class="container" style="margin-left: 300px;">
+        <div class="row mt-4">
+            <a href="/admin/add-geners" class=" btn btn-success ml-auto">Add Gener</a>
+        </div>
+        <table id="geners" class="table mt-5">
+  <thead class="thead-dark">
+    <tr>
+     <th scope="col">No</th>
+      <th scope="col">Gener</th>
+      <th scope="col">Delete</th>
+     
+
+    </tr>
+  </thead>
+  <tbody>
+      {{#each geners}}
+    <tr>
+        <td style="color: black;">{{counter @index}}</td>
+        <td style="font-size:larger ; color: black;">{{this.gener}}</td>
+        <td>
+         {{!-- <a href="/admin/delete-gener/{{this._id}}" class="btn btn-danger" onclick="return confirm('Are you want to delete {{this.gener}} ?')">Delete</a> --}}
+             <button class="btn btn-danger" onclick="sweetalertclick1('/admin/delete-gener/{{this._id}}')">Delete</button>
+       </td>
+    </tr>
+    {{/each}}
+  </tbody>
+</table>
+
+    </div>
+</section>
+ 
+<script>
+  $(document).ready(function() {
+    $('#geners').DataTable();
+} );
+</script>
+
+<script>
+  function sweetalertclick1(value){
+  Swal.fire({
+  title: 'Are you sure?',
+  text: "You want to delete this gener!",
+  icon: 'warning',
+  showCancelButton: true,
+  confirmButtonColor: '#3085d6',
+  cancelButtonColor: '#d33',
+  confirmButtonText: 'Delete!'
+}).then((result) => {
+  if (result.isConfirmed) {
+   window.location = value
+  }
+})
+}
+</script>

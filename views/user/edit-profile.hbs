@@ -1,0 +1,69 @@
+ {{>user-header}}
+
+<style>
+   .body{
+       margin: 0px;
+       padding: 0px;
+   }
+   .box-1{
+       width: 200px;
+   }
+
+</style>
+
+<div class="container " style="width: 500px; height: 600px; margin-top: 30px; background-color: rgb(6, 118, 90);">
+<form action="/edit-profile" method="post">
+  <!-- 2 column grid layout with text inputs for the first and last names -->
+  <div class="row mb-4">
+    <div class="col">
+      <div class="form-outline" style="padding-top: 50px;">
+        <input type="text" id="Name" name="Name" class="form-control" />
+        <label style="color: white;" class="form-label" for="form3Example1">First name</label>
+      </div>
+    </div>
+    <div class="col">
+      <div class="form-outline"style="padding-top: 50px;" >
+        <input type="email" id="Email" name="Email"  class="form-control" />
+        <label style="color: white;" class="form-label" for="form3Example2">Email address</label>
+      </div>
+    </div>
+  </div>
+
+  <!-- Email input -->
+  <div class="form-outline mb-4">
+    <input type="number" id="phoneNumber" name="phoneNumber"  class="form-control" />
+    <label style="color: white;" class="form-label" for="form3Example3">Phone Number</label>
+  </div>
+
+  <!-- Password input -->
+   <div class="row mb-4">
+    <div class="col">
+      <div class="form-outline" >
+        <input type="text" id="city" name="City"  class="form-control" />
+        <label style="color: white;" class="form-label" for="form3Example1">City</label>
+      </div>
+    </div>
+    <div class="col">
+      <div class="form-outline" >
+        <input type="number" id="pincode" name="pincode"  class="form-control" />
+        <label style="color: white;" class="form-label" for="form3Example2">Pincode</label>
+      </div>
+    </div>
+  </div>
+
+    <div class="form-outline mb-4">
+    <input type="text" id="address" name="address"  class="form-control" />
+    <label style="color: white;" class="form-label" for="form3Example3">Address</label>
+  </div>
+
+  <!-- Checkbox -->
+
+
+  <!-- Submit button -->
+  <button type="submit" class="btn btn-primary btn-block mb-4">Edit</button>
+
+  <!-- Register buttons -->
+ 
+</form>
+</div>
+

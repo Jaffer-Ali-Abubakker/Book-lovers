@@ -1,0 +1,144 @@
+
+
+<style>
+  @import url("https://fonts.googleapis.com/css2?family=Sansita+Swashed:wght@600&display=swap");
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: linear-gradient(45deg, greenyellow, dodgerblue);
+  font-family: "Sansita Swashed", cursive;
+}
+.center {
+  position: relative;
+  padding: 50px 50px;
+  background: #fff;
+  border-radius: 10px;
+}
+.center h1 {
+  font-size: 2em;
+  border-left: 5px solid dodgerblue;
+  padding: 10px;
+  color: #000;
+  letter-spacing: 5px;
+  margin-bottom: 60px;
+  font-weight: bold;
+  padding-left: 10px;
+}
+.center .inputbox {
+  position: relative;
+  width: 300px;
+  height: 50px;
+  margin-bottom: 50px;
+}
+.center .inputbox input {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  border: 2px solid #000;
+  outline: none;
+  background: none;
+  padding: 10px;
+  border-radius: 10px;
+  font-size: 1.2em;
+}
+.center .inputbox:last-child {
+  margin-bottom: 0;
+}
+.center .inputbox span {
+  position: absolute;
+  top: 14px;
+  left: 20px;
+  font-size: 1em;
+  transition: 0.6s;
+  font-family: sans-serif;
+}
+.center .inputbox input:focus ~ span,
+.center .inputbox input:valid ~ span {
+  transform: translateX(-13px) translateY(-35px);
+  font-size: 1em;
+}
+.center .inputbox [type="button"] {
+  width: 50%;
+  background: dodgerblue;
+  color: #fff;
+  border: #fff;
+}
+.center .inputbox:hover [type="button"] {
+  background: linear-gradient(45deg, greenyellow, dodgerblue);
+}
+
+</style>
+      <div class="center">
+    {{#if invalid}}
+    <h5 style="color: rgb(151, 16, 16);">{{invalid }}</h5>
+    {{/if}} 
+
+  <h1>Book Lovers</h1>
+
+  <form action="/admin/login" method="post" id="Form" name="Form" >
+  
+     <div  id="errorEmail" style="color: crimson; padding-left: 100px;"></div>
+    <div class="inputbox">
+     
+      <input type="text"  type="email" name="Email" id="Email">
+      <span>Email</span>
+    </div>
+     <div id="errorPassword" style="color: crimson; padding-left: 100px;"></div>
+    <div class="inputbox">
+      <input type="password"  id="Password" name="password">
+      <span>Password</span>
+    </div>
+       
+    <div class="inputbox">
+      <button type="submit" class="btn btn-success">Login</button>
+    </div>
+  </form>
+  <br>
+</div>
+
+
+<script>
+        const email=document.getElementById("Email");
+        const password=document.getElementById("Password");
+        const form=document.getElementById("Form");
+        const error1=document.getElementById("errorEmail");
+        const error2=document.getElementById("errorPassword");
+ 
+        form.addEventListener('submit',(e)=>{
+          let message1=[]
+          let message2=[]
+      
+          if(email.value===''||email.value==null){
+            message1.push('Please enter ther email')
+        }else if(email.value.indexOf('@')<=0){
+          message1.push('Invaild @ position')
+        }else if(email.value.charAt(email.value.length-4)!='.'){
+          message1.push('Email format Incorrect')
+
+        }
+        
+          if(password.value===''||password.value==null){
+            message2.push('Please enter the password')
+          }
+           else if(password.value.length<3){
+            message2.push('password must be atleast 3 character')
+          }
+          if(message1.length>0){
+           e.preventDefault();
+           error1.innerText=message1.join('  ')
+          }
+          if(message2.length>0){
+            e.preventDefault()
+            error2.innerText=message2.join('  ')
+          }
+         
+         
+        })
+       
+      </script> 

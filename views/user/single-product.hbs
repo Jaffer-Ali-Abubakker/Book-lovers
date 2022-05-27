@@ -1,0 +1,102 @@
+{{>user-header}}
+
+<style>
+    html,
+body {
+    height: 100%
+}
+
+* {
+    padding: 0px;
+    margin: 0px
+}
+
+body {
+    background-color: #daecec;
+    display: grid;
+    
+}
+
+.card {
+    background-color: #ffffff;
+    border-radius: 20px
+}
+
+p {
+    color: #b7b1b1;
+    font-weight: 500
+}
+
+.discBtn {
+    background-color: #21afa7;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 500
+}
+
+.fa-heart {
+    color: #f05c5d
+}
+
+.fa-balance-scale {
+    color: #968888
+}
+
+.fa-arrows {
+    -webkit-transform: rotate(-45deg);
+    -moz-transform: rotate(-45deg)
+}
+
+.buy {
+    border-radius: 20px;
+    background-color: #e8f6f6;
+    color: #2bc4ba
+}
+
+.cart {
+    background-color: #2bc4ba;
+    border-radius: 30px;
+    position: relative;
+    right: 35px
+}
+
+.btn:focus {
+    outline: none;
+    box-shadow: none
+}
+
+*:focus {
+    outline: none
+}
+</style>
+
+
+
+<div class="container-fluid">
+    <div class="row justify-content-center">
+       
+        <div class="col-12 col-md-4 col-sm-12 col-xs-12">
+            <div class="card pl-4 pr-3 py-2">
+                <div class="div1 row py-4 px-2">
+                    <div class="col-3 mt-2"> <button class="btn discBtn text-white p-1 p-md-2">-25%</button> </div>
+                    <div class="col-6 d-flex justify-content-center"> <img src="/product-images/{{this.details._id}}.jpg" height="300px" width="200px" alt=""> </div>
+                    {{!-- <div class="col-3 d-flex flex-column pl-4"> <i class="fa fa-heart fa-lg mt-4" aria-hidden="true"></i> <i class="fa fa-balance-scale mt-3 font-weight-bold" aria-hidden="true"></i> </div> --}}
+                </div>
+                <div class="py-2">
+                    {{!-- <p class="ml-3 ml-md-5"> <i class="fa fa-paw" aria-hidden="true"></i> <span class="small">20</span> <i class="fa fa-arrows ml-4" aria-hidden="true"></i> <span class="small"> 0% 12m</span> </p> --}}
+                    <h5>{{details.Name}}</h5>
+                    <p> {{details.Author}} </p>
+                    <div class="d-flex">
+                        <h5 class="align-self-center">Rs.{{details.price}}</h5> 
+                            <button class="buy d-flex ml-auto font-weight-bold pl-4 pr-5 py-2 border-0" onclick="addToCart('{{this.details._id}}')" > Buy </button> <span class="cart text-white d-flex p-2">
+                            <a><i  class="fa fa-shopping-cart fa-lg align-self-center" aria-hidden="true"></i></a></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+       
+    </div>
+</div>
+
+
+

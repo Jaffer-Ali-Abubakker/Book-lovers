@@ -1,0 +1,190 @@
+{{!-- <style>
+    .body{
+        width: min-content;
+    }
+    .form-control{
+        color: black;
+    }
+</style>
+
+<section>
+    <div class="container mt-4">
+        <div class="row">
+
+            <div class="col-md-6">
+            <h2 class="text-center">Edit User</h2>
+            <form action="/admin/edit-product/{{product._id}}" method="post" enctype="multipart/form-data">
+               <label for="Name">Name</label>
+               <input type="text" name="Name" class="form-control" value="{{product.Name}}">
+
+               <label for="">Author</label>
+               <input type="text" name="Author" class="form-control" value="{{product.Author}}">
+
+               <label for="">Gener</label>
+               <input type="text" name="category" class="form-control" value="{{product.category}}">
+
+               <label for="">Rating</label>
+               <input type="text" name="rating" class="form-control" value="{{product.rating}}">
+
+               <label for="">Price</label>
+               <input type='number' name="price" class="form-control" value={{product.price}}>
+
+               <label for="">Image</label>
+               <img src="/product-images/{{product._id}}.jpg" alt="" style="width: 100px; height: auto;" id="imgView" class="pt-3">
+               <input type="file" name="Image" class="form-control" onchange="viewImage(event)">
+
+               <button type="submit" class="btn btn-success mt-4">Submit</button>
+
+            </form>
+            </div>
+        </div>
+
+    </div>
+</section>
+<script>
+    function viewImage(event){
+        document.getElementById('imgView').src=URL.createObjectURL(event.target.files[0])
+    }
+</script> --}}
+
+ <body>
+  
+    <div class="container tm-mt-big tm-mb-big">
+      <div class="row">
+        <div class="col-xl-9 col-lg-10 col-md-12 col-sm-12 mx-auto">
+          <div class="tm-bg-primary-dark tm-block tm-block-h-auto">
+            <div class="row">
+              <div class="col-12">
+                <h2 class="tm-block-title d-inline-block">Edit Product</h2>
+              </div>
+            </div>
+            <div class="row tm-edit-product-row">
+              <div class="col-xl-6 col-lg-6 col-md-12">
+                <form  method="post" enctype="multipart/form-data" class="tm-edit-product-form">
+                  <div class="form-group mb-3">
+                    <label
+                      for="name"
+                      >Book Name
+                    </label>
+                    <input
+                      id="name"
+                      name="Name"
+                      type="text"
+                      value="{{product.Name}}"
+                      class="form-control validate"
+                      required
+                    />
+                  </div>
+                  <div class="form-group mb-3">
+                    <label
+                      for="name"
+                      >Author
+                    </label>
+                    <input
+                      id="name"
+                      name="Author"
+                      type="text"
+                      value="{{product.Author}}"
+                      class="form-control validate"
+                      required
+                    />
+                  </div>
+                 
+                 <div class="form-group mb-3">
+                    <label
+                      for="category"
+                      >Category</label
+                    >
+                    <select
+                      class="custom-select tm-select-accounts"
+                      id="name"
+                      name="category"
+                      type="text"
+                      value="{{product.category}}"
+                      
+                    >
+                      <option selected>Select Genres</option>
+                      {{#each geners}}
+                      <option value="{{this.gener}}">{{this.gener}}</option>
+                      {{/each}}
+                    </select>
+                  </div>
+                  <div class="row">
+                      <div class="form-group mb-3 col-xs-12 col-sm-6">
+                          <label
+                      for="name"
+                      >Rating
+                    </label>
+                    <input
+                      id="name"
+                      name="rating"
+                      type="text"
+                      class="form-control validate"
+                      value="{{product.rating}}"
+                      required
+                    />
+                        </div>
+                        <div class="form-group mb-3 col-xs-12 col-sm-6">
+                          <label
+                            for="price"
+                            >price
+                          </label>
+                          <input
+                            id="stock"
+                            name="price"
+                            type='number'
+                            value={{product.price}}
+                            class="form-control validate"
+                            required
+                          />
+                        </div>
+                  </div>
+                  
+              </div>
+              <div class="col-xl-6 col-lg-6 col-md-12 mx-auto mb-4">
+                <label for="" style="color: rgb(251, 251, 251);">Image</label>
+                <img src="/product-images/{{product._id}}.jpg" alt="" style="width: 100px; height: auto;" id="imgView" class="">
+                <div class="pt-3">
+               <input type="file" name="Image" class="form-control" onchange="viewImage(event)" style="color: rgb(0, 0, 0);">
+               </div>
+              </div>
+               <div class="form-group mb-3 col-xs-12 col-sm-6">
+                          <label
+                            for="Discount"
+                            >Discount
+                          </label>
+                          <input
+                            id="stock"
+                            name="Discount"
+                            type='number'
+                            value={{product.discount}}
+                            class="form-control validate"
+                            required
+                          />
+                        </div>
+              <div class="col-12">
+                <button type="submit" onclick="confirmation('/admin/edit-product/{{product._id}}')" class="btn btn-primary btn-block text-uppercase">Submit</button>
+              </div>
+            </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+    function viewImage(event){
+        document.getElementById('imgView').src=URL.createObjectURL(event.target.files[0])
+    }
+
+    function confirmation(value){
+      Swal.fire({
+  position: 'top-center',
+  icon: 'success',
+  title: 'Your work has been saved',
+  showConfirmButton: false,
+  timer: 1500
+})
+  window.location = value
+    }
+</script>

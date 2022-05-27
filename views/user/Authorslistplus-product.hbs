@@ -1,0 +1,234 @@
+
+
+
+  {{>user-header}}
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+.navbar .navbar-nav .nav-item .active {
+    color: #67971f;
+}
+
+a.fas {
+    position: relative;
+    font-size: 20px;
+    text-decoration: none;
+    color: black;
+}
+
+.num {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    top: -8px;
+    left: 18px;
+    width: 15px;
+    height: 15px;
+    font-size: 8px;
+    background-color: #67971f;
+    color: white;
+}
+
+
+.col-lg-3 .btn.btn-primary {
+    width: 100%;
+    height: 43px;
+    box-shadow: none;
+    outline: none;
+    background-color: #67971f;
+    color: white;
+    font-weight: 800;
+    padding: 0px 15px;
+    line-height: 22px;
+    border: none;
+}
+
+.col-lg-3 .btn.btn-primary:focus {
+    outline: none;
+    box-shadow: none;
+}
+
+.col-lg-3 .btn.btn-primary:hover {
+    background-color: #aadf5a;
+
+}
+
+.col-lg-3 ul {
+    width: 100%;
+}
+
+.col-lg-9 .btn.btn-secondary {
+    width: 100%;
+    height: 100% !important;
+    box-shadow: none;
+    outline: none;
+    background-color: transparent;
+    color: black;
+    font-weight: 800;
+    padding: 0px 15px;
+    line-height: 22px;
+    border: none;
+}
+
+
+.col-lg-9 .btn.btn-primary {
+    background-color: #67971f;
+    border: none;
+    height: 100%;
+    width: 100px;
+}
+
+.col-lg-9 .btn.btn-primary:hover {
+    background-color: #aadf5a;
+}
+
+.col-lg-9 ul {
+    width: 100%;
+}
+
+.fas.fa-phone {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #67971f;
+}
+
+.p-green {
+    letter-spacing: 2px;
+    color: #67971f;
+    font-size: 14px;
+}
+
+input {
+    width: 230px;
+    border: none;
+    outline: none;
+}
+
+p {
+    margin: 0%;
+}
+
+.text-muted {
+    font-size: 14px;
+}
+
+
+.btn.btn-success {
+    color: white;
+    background-color: #67971f;
+    outline: none;
+    border: none;
+}
+
+.btn.btn-success:hover {
+    background-color: #aadf5a;
+}
+
+@media(max-width:1022px) {
+    input {
+        width: 100%;
+        border: none;
+    }
+}
+</style>
+
+
+      <div class="">
+        <div class="row">
+            <div class="col-lg-3 mb-lg-0 mb-2">
+                <p>
+                    <a class="btn btn-primary w-100 d-flex align-items-center justify-content-between"
+                        data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="true"
+                        aria-controls="collapseExample">
+                        <span class="fas fa-bars"><span class="ps-3">ALL-AUTHORS</span></span>
+                        <span class="fas fa-chevron-down"></span>
+                    </a>
+                </p>
+                <div class="collapse show border" id="collapseExample">
+                    
+                        {{#each authors}}
+                        <form action="/Authorslistplus-product" method="post">
+                           <input type="text" style="display: none;" name="Author" value="{{this.Author}}">
+                           <input type="text" style="display: none;" name="id" value=" {{this._id}}">
+                          <button type="submit" class="dropdown-item" style="color:rgb(0, 0, 0); font-weight: bolder "  >{{this.Author}}</button>
+                        </form>
+
+                    {{/each}}
+                </div>
+            </div>
+            <div class="col-lg-9">
+                <div class="d-lg-flex">
+                    <div class="d-lg-flex align-items-center border">
+                      
+                    </div>
+                  
+                    <section class="product_section ">
+    <div class="container">
+      
+      <div class="product_heading">
+
+      </div>
+
+      <div class="product_container">
+         {{#each authorsproduct}}
+        <div class="box">
+          <div class="box-content">
+            <span class="badge badge-success">-{{this.discount}}%</span>
+            <div class="img-box">
+             <a href="/single-product/{{this._id}}" class="image"><img src="/product-images/{{this._id}}.jpg" class="image" alt=""></a>
+            </div>
+            <div class="detail-box">
+              <div class="text">
+                <h5>
+                  {{this.Name}}
+                </h5>
+                <p>{{this.category}}</p>
+               
+                <h5>
+                  <span>₹</span> {{this.price}}
+                </h5>
+              </div>
+              <div class="like">
+                <h6>
+                  Like
+                </h6>
+                <div class="star_container">
+                  <i class="fa fa-star" aria-hidden="true"></i>
+                  <i class="fa fa-star" aria-hidden="true"></i>
+                  <i class="fa fa-star" aria-hidden="true"></i>
+                  <i class="fa fa-star" aria-hidden="true"></i>
+                  <i class="fa fa-star" aria-hidden="true"></i>
+                </div>
+              </div>
+            </div>
+                <button  id="add" onclick="addToWish('{{this._id}}')" class="btn btn-dark btn-sm" style="display:;">
+               {{!-- <i class="fa fa-bookmark"></i> --}}
+               <span style="font-size:small;" class="tooltipp">add to wishlist</span></button>
+          </div>
+          <div class="btn-box">
+            <button id="cart-counts" onclick="addToCart('{{this._id}}')" class="btn btn-primary">
+              Add To Cart
+            </button>
+          </div>
+        </div>
+         {{/each}}
+          
+      </div>
+    </div>
+  </section>
+                </div>
+            </div>
+        </div>
+    </div>

@@ -1,0 +1,67 @@
+<style>
+    .card {
+    width: 350px;
+    padding: 10px;
+    border-radius: 20px;
+    background: #fff;
+    border: none;
+    height: 350px;
+    position: relative;
+    
+}
+.list{
+    padding: auto;
+
+}
+
+.container {
+    height: 100vh
+}
+
+body {
+    background: #eee
+}
+
+.mobile-text {
+    color: #989696b8;
+    font-size: 15px
+}
+
+.form-control {
+    margin-right: 12px
+}
+
+.form-control:focus {
+    color: #495057;
+    background-color: #fff;
+    border-color: #ff8880;
+    outline: 0;
+    box-shadow: none
+}
+
+.cursor {
+    cursor: pointer
+}
+</style>
+<section style="margin-left: 230px;">
+    <div class="container">
+        <div class="row mt-4">
+
+ <a href="/admin/geners-list" class=" btn btn-success ml-auto">Genre List</a>
+
+<div class="d-flex justify-content-center align-items-center container">
+    
+    <form action="/admin/add-geners" method="post" class="card py-5 px-3">
+        <h5 class="m-0">ADD NEW GENRE</h5><span class="mobile-text">Dont add the existing Gener only add book genre <b class="text-danger"></span>
+        
+        
+        <label for="password">Add New</label>
+        
+                 <input type="text" class="form-control" id="gener" name="gener" placeholder="Enter new gener">
+        {{!-- <button class="text-center mt-5"><span class="d-block mobile-text">Don't receive the code?</span><span class="font-weight-bold text-danger cursor">Resend</span></button> --}}
+                 <button type="submit" class="btn-primary float-right" style="margin-top: 50px; margin-right: 130px;">Submit</button>
+    </form>
+</div>
+        </div>
+        </div>
+        </section>
