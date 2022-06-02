@@ -165,7 +165,6 @@
               > Login</i>
             </a>
           {{/if}}
-          {{#if cartCount}}
             <a href="/cart" style="padding-right: 60px; padding-top: 10px;">
               <i class="fa fa-shopping-bag"></i>
               <span
@@ -173,18 +172,6 @@
                 id="cart-counts"
               >{{cartCount}}</span><span>My Cart</span>
             </a>
-          {{else}}
-            <a
-              href="/cart-is-empty"
-              style="padding-right: 60px; padding-top: 10px;"
-            >
-              <i class="fa fa-shopping-bag"></i>
-              <span
-                class="badge badge-success"
-                id="cart-counts"
-              >{{cartCount}}</span><span>My Cart</span>
-            </a>
-          {{/if}}
         </div>
       </div>
     </nav>

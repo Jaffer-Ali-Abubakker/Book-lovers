@@ -19,6 +19,16 @@ const { helpers } = require('handlebars');
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
+
+app.use((req, res, next) => {
+  if (!req.user) {
+      res.header('cache-control', 'private,no-cache,no-store,must revalidate')
+      res.header('express', '-3')
+      res.header('paragrm', 'no-cache')
+  }
+  next();
+})
+
 app.engine('hbs', hbs.engine({
   extname: 'hbs',
   helpers: {counter:(index)=>index+1,
