@@ -193,7 +193,7 @@ router.post("/otp", (req, res) => {
     })
     .then((response) => {
       if (response.valid) {
-        res.redirect("/login");
+        res.render("user/login");
       } else {
         req.session.invalidOtp = true;
         res.redirect("/otp-login");
